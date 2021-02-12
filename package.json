@@ -1,0 +1,21 @@
+{
+  "name": "used-book-app-api",
+  "version": "1.0.0",
+  "description": "Application Programming Interface written in GraphQL for the used books app written in flutter",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ll-Eywa-ll/used-book-app-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ll-Eywa-ll/used-book-app-api/issues"
+  },
+  "homepage": "https://github.com/ll-Eywa-ll/used-book-app-api#readme"
+}
