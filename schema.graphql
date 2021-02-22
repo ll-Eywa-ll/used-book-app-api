@@ -1,6 +1,3 @@
-// import { gql } from 'gql';
-
-const typeDefs = `
   """
   This is a User Type and contains all the user personal information
   Required Fields are - id, firstName, lastName, emailID, books
@@ -19,7 +16,7 @@ const typeDefs = `
   type Book {
     id: ID!
     name: String!
-    isbn: String
+    isbn: Int
     edition: Int
     author: String!
     imgUrl: String
@@ -51,9 +48,7 @@ const typeDefs = `
   }
 
   type Query {
+    info: String
     user: User
     books: Book
   }
-`;
-
-module.exports = typeDefs;

@@ -1,0 +1,64 @@
+// 1
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 2
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String      @id
+  uuid          Int?
+  firstName     String
+  lastName      String
+  phoneNumber   Int?        @unique
+  emailId       String      @unique
+  addresses     Address[]         
+}
+
+model Address {
+  id            Int         @id @default(autoincrement())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  addressLine1  String
+  addressLine2  String?
+  addressLine3  String?
+  pinCode       String
+  city          String
+  province      String
+}
+
+model Book {
+  id            Int         @id() @default(autoincrement())
+  name          String      
+  isbn          Int         @unique
+  edition       Int?
+  author        String?
+  imgUrl        String
+  status        Status      @default(FORSELL)
+  prices        Price[]
+}
+
+enum Status {
+  BUY
+  FORSELL
+  SOLD
+}
+
+model Price {
+  id            Int         @id @default(autoincrement())
+  book          Book        @relation(fields: [bookId], references: [id])
+  bookId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  status        PriceStatus @default(ENABLE)
+  price         Int
+}
+
+enum PriceStatus {
+  ENABLE
+  DISABLE
+}
