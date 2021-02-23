@@ -1,54 +1,75 @@
+"""
+This is a User Type and contains all the user personal information
+Required Fields are - id, firstName, lastName, emailID, books
+"""
+type User {
+  id: ID!
+  uuid: String
+  firstName: String!
+  lastName: String!
+  phoneNumber: String
+  emailId: String!
+  addresses: [Address!]
+  books: [Book!]!
+}
+
+type Book {
+  id: ID!
+  name: String!
+  isbn: Int
+  edition: Int
+  author: String!
+  imgUrl: String
+  status: Status
+  prices: [Price!]!
+}
+
+type Price {
+  book: Book
+  price: Float!
+  user: User!
+}
+
+enum Status {
+  BUY
+  SOLD
+  FORSALE
+}
+
+type Address {
+  id: ID!
+  user: User
+  addressLine1: String!
+  addressLine2: String
+  addressLine3: String
+  pinCode: String!
+  city: String!
+  province: String!
+}
+
+type Query {
   """
-  This is a User Type and contains all the user personal information
-  Required Fields are - id, firstName, lastName, emailID, books
+  `info` gives you the general information of the API
   """
-  type User {
-    id: ID!
-    uuid:ID
+  info: String
+
+  """
+  `getAllUsers` gives you the list of all the users on the database
+  """
+  getAllUsers: [User]
+
+  """
+  `getUserByEmailId(emailId: "")` gives you the User info back as per your given email id
+  """
+  getUserByEmailId(emailId: String!): User
+}
+
+type Mutation {
+  createNewUser(
+    uuid: String
     firstName: String!
     lastName: String!
     phoneNumber: String
-    emailID: String!
-    addresses: [Address!]
-    books: [Book!]!
-  }
-
-  type Book {
-    id: ID!
-    name: String!
-    isbn: Int
-    edition: Int
-    author: String!
-    imgUrl: String
-    status: Status
-    prices: [Price!]!
-  }
-
-  type Price {
-    book: Book
-    price: Float!
-    user: User!
-  }
-
-  enum Status {
-    BUY
-    SOLD
-    FORSALE
-  }
-
-  type Address {
-    id: ID!
-    user: User
-    addressLine1: String!
-    addressLine2: String
-    addressLine3: String
-    pinCode: String!
-    city: String!
-    province: String!
-  }
-
-  type Query {
-    info: String
-    user: User
-    books: Book
-  }
+    emailId: String!
+  ): User
+}

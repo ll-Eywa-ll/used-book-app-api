@@ -11,10 +11,10 @@ generator client {
 
 model User {
   id            String      @id
-  uuid          Int?
+  uuid          String?
   firstName     String
   lastName      String
-  phoneNumber   Int?        @unique
+  phoneNumber   String?     @unique
   emailId       String      @unique
   addresses     Address[]         
 }
